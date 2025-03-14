@@ -11,3 +11,5 @@ Data Sources UFC by the Numbers: A Deep Dive into Fighters, Matches, and Events 
 Ultimate UFC Dataset: [Link to Dataset](https://www.kaggle.com/datasets/mdabbert/ultimate-ufc-dataset) (CSV)
 
 Potential Visualizations: Bar charts, Scatter plot, Radar Chart
+
+Presentation: [Slides](https://docs.google.com/presentation/d/1LaH9ZS7QgLO_0rbhPKtw-N5JT-baJ2p91I7MpeCXw98/edit?usp=sharing)
