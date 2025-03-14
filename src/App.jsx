@@ -1,13 +1,12 @@
 import React from 'react'
 import './styles/App.css'
-
+import UFCChampionData from './components/UFCChampionData';
 function App() {
   return (
     <div className="app">
-      <h1>Welcome to your new React project!</h1>
-      <p>Start editing src/App.jsx to see your changes.</p>
-    </div>
+  <UFCChampionData csvFile="/ufc_data.csv" />
+  </div>
   )
 }
 
-export default App
+export default App;
