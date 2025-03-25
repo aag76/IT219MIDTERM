@@ -4,7 +4,7 @@ import UFCHeatmap from './components/UFCHeatmap';
 function App2() {
   return (
     <div className="app">
-  <UFCHeatmap csvFile="/ufc_data.csv" />
+  <UFCHeatmap csvFile="/UFC_champions.csv" />
   </div>
   )
 }

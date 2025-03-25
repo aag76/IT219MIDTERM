@@ -10,6 +10,48 @@
   box-sizing: border-box;
 }
 
+
+
 body {
   min-height: 100vh;
+
+  background-image: linear-gradient(to bottom, gray,rgb(72, 71, 71) );
+
+}
+.centeredLink{
+  margin:auto;
+  text-align: center;
+  border:3px white;
+}
+nav {
+  background-color: #333; /* Dark background */
+  padding: 10px 20px; /* Padding around the nav */
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav ul {
+  list-style-type: none; /* Remove bullet points */
+  margin: 0;
+  padding: 0;
+  display: flex; /* Horizontal layout */
+  gap: 15px; /* Space between items */
+}
+
+nav a {
+  text-decoration: none; /* Remove underline */
+  color: white; /* White text */
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 15px; /* Padding for clickable area */
+  transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+nav a:hover {
+  background-color: #555; /* Darker background on hover */
+  border-radius: 5px; /* Rounded corners */
+}
+nav img {
+  height:40px;
 }

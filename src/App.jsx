@@ -1,10 +1,11 @@
 import React from 'react'
 import './styles/App.css'
 import UFCChampionData from './components/UFCChampionData';
+import UFCFighterStats from './components/UFCChampionData';
 function App() {
   return (
     <div className="app">
-  <UFCChampionData csvFile="/ufc_data.csv" />
+  <UFCFighterStats csvFile="/UFC_champions.csv" />
   </div>
   )
 }

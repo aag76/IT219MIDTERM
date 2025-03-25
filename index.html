@@ -1,32 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MMA Visualization Radar Chart</title>
-<style>
-  body {
-    background-image: linear-gradient(to bottom, gray,rgb(72, 71, 71) );
+  <title>Home Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  }
-  .centeredLink{
-    margin:auto;
-    text-align: center;
-    border:3px white;
-  }
-</style> 
+    body {
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background-image: linear-gradient(to bottom, gray, rgb(72, 71, 71));
+      color: white;
+      padding: 20px;
+    }
+
+    nav {
+      background-color: #222;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      padding: 10px 15px;
+      transition: 0.3s;
+      border-radius: 5px;
+    }
+
+    nav a:hover {
+      background-color: #555;
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 1000px;
+      margin: 30px auto;
+    }
+
+    .content img {
+      max-width: 40%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .text {
+      flex: 1; 
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .content img {
+        max-width: 80%;
+      }
+    }
+  </style>
 </head>
-
 <body>
-  <div id="root"></div>
 
-  <script type="module" src="/src/main.jsx"></script>
-  <div class="centeredLink">  <a href ="heatmap.html">Heat Map</a>
-  <div class="centeredLink">  <a href ="barchart.html">Bar Graph</a>
+  <nav>
+    <ul>
+      <li><a href="heatmap.html">Heat Map</a></li>
+      <li><a href="radarchart.html">Radar Chart</a></li>
+      <li><a href="UFCPerformanceGraph.html">Bar Graph</a></li>
+    </ul>
+  </nav>
 
+  <div class="content">
+    <div class="text">
+      <h3>What Is The UFC?</h3>
+      <p>
+        The UFC is a Mixed Martial Arts Organization that was founded on November 12, 1993, in Denver, Colorado. Its original purpose was for 
+        martial artists of various disciplines like Karate, Boxing, Kickboxing, Muay Thai, Judo, and others to gather together and see which of their 
+        martial arts were the most effective with minimal rules and no weight classes.
+      </p>
+    </div>
+    <img src="rorion-gracie-1.jpg" alt="Rorion and Art Davie">
+  </div>
+  <div class = "content">
+    <div class ="text">
+      <H3>What Is The UFC Like Now?</H3>
+      <p>
+        In 2001, Dana White became the CEO of the UFC after his childhood friends took it over. He effectively is mostly responsible for the changes that have been made
+        to the UFC. In this time, the UFC doesno single night tournaments, or lack of weight classes. it was during Dana White's era that fighters had starte to
+        truly mix up the martial arts.
+      </p>  
+    </div>
+    <img src="dana.jpeg" alt="Dana white">
+  </div>
+  <div class="content">
+    <div class ="text">
+      <H3>What is Mixed Martial Arts?</H3>
+      <p>
+        Although at the conception of Mixed Martial Arts, it was only a ruleset, now it is a fullblown art and combat sport of its own. It combines various techniques from
+        other martial arts disciplines like: striking from Boxing, Muay Thai, Karate, Kickboxing,etc , grappling from Sambo, Brazilian Jiu-Jitsu, Judo, etc. The fighters fight 
+        in an octogon in contrast to boxing in a ring where they use striking, takedowns, submissions to either win by decision or by knockout.
+      </p>  
+    </div>
+    <img src="281402.JPG" alt="Ilia Topuria and Alexander vokanovski">
+  </div>
   </div>
 
 </body>
-
 </html>
