@@ -15,7 +15,7 @@ const UFCFighterStats = ({ csvFile }) => {
         if (!fighterStats[fighter]) {
           fighterStats[fighter] = {
             Name: fighter,
-            Total_Wins: 0, // Keep wins as total
+            Total_Wins: 0,
             Total_Strikes_Thrown: 0,
             Total_Takedowns_Attempted: 0,
             Total_Submissions_Attempted: 0,
@@ -128,19 +128,18 @@ const FighterRadarChart = ({ fighterData }) => {
         .text(d.axis);
     });
 
-    // Compute radar shape coordinates
     const radarLine = d3.lineRadial()
-      .radius(d => radiusScale(d.value))
-      .angle((d, i) => i * angleSlice - Math.PI / 2)
-      .curve(d3.curveLinearClosed);
-
-    g.append('path')
-      .datum(stats)
-      .attr('d', radarLine)
-      .attr('fill', 'rgba(0, 0, 255, 0.3)')
-      .attr('stroke', '#00f')
-      .attr('stroke-width', 2);
-
+    .radius(d => radiusScale(d.value))
+    .angle((d, i) => i * angleSlice) 
+    .curve(d3.curveLinearClosed);
+  
+  g.append('path')
+    .datum(stats)
+    .attr('d', radarLine)
+    .attr('fill', 'rgba(0, 0, 255, 0.3)')
+    .attr('stroke', '#00f')
+    .attr('stroke-width', 2);
+  
     g.selectAll('.data-point')
       .data(stats)
       .enter()
