@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 
 const UFCFighterStats = ({ csvFile }) => {
   const [fightersData, setFightersData] = useState([]);
+  const [selectedFighter, setSelectedFighter] = useState(null);
 
   useEffect(() => {
     d3.csv(csvFile).then((data) => {
@@ -38,7 +39,6 @@ const UFCFighterStats = ({ csvFile }) => {
         }
       });
 
-    
       const processedStats = Object.values(fighterStats).map((fighter) => ({
         Name: fighter.Name,
         Total_Wins: fighter.Total_Wins, 
@@ -49,20 +49,76 @@ const UFCFighterStats = ({ csvFile }) => {
       }));
 
       setFightersData(processedStats);
+      if (processedStats.length > 0) {
+        setSelectedFighter(processedStats[0]);
+      }
     });
   }, [csvFile]);
 
+  const handleFighterChange = (event) => {
+    const fighter = fightersData.find(f => f.Name === event.target.value);
+    setSelectedFighter(fighter);
+  };
+
   return (
-    <div>
-      <h2>UFC Fighter 1 Radar Chart (Averages)</h2>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-        {fightersData.map((fighter) => (
-          <div key={fighter.Name} style={{ border: '1px solid #ddd', padding: '10px', borderRadius: '5px' }}>
-            <h3>{fighter.Name} ({fighter.ActiveYears})</h3>
-            <FighterRadarChart fighterData={fighter} />
-          </div>
-        ))}
+    <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
+      <h2>UFC Fighter Radar Chart</h2>
+      
+      {/* Dropdown for selecting fighters */}
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="fighter-select" style={{ marginRight: '10px' }}>
+          Select Fighter:
+        </label>
+        <select 
+          id="fighter-select"
+          onChange={handleFighterChange}
+          style={{ 
+            padding: '8px', 
+            fontSize: '16px', 
+            width: '100%', 
+            maxWidth: '300px' 
+          }}
+        >
+          {fightersData.map((fighter) => (
+            <option key={fighter.Name} value={fighter.Name}>
+              {fighter.Name} ({fighter.ActiveYears})
+            </option>
+          ))}
+        </select>
       </div>
+
+      {/* Display selected fighter's stats */}
+      {selectedFighter && (
+        <div style={{ 
+          border: '1px solid #ddd', 
+          borderRadius: '8px', 
+          padding: '15px', 
+          textAlign: 'center' 
+        }}>
+          <h3>{selectedFighter.Name} ({selectedFighter.ActiveYears})</h3>
+          <FighterRadarChart fighterData={selectedFighter} />
+          
+          {/* Additional fighter stats */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-around', 
+            marginTop: '15px' 
+          }}>
+            <div>
+              <strong>Total Wins:</strong> {selectedFighter.Total_Wins}
+            </div>
+            <div>
+              <strong>Avg Strikes:</strong> {selectedFighter.Avg_Strikes_Thrown.toFixed(2)}
+            </div>
+            <div>
+              <strong>Avg Takedowns:</strong> {selectedFighter.Avg_Takedowns_Attempted.toFixed(2)}
+            </div>
+            <div>
+              <strong>Avg Submissions:</strong> {selectedFighter.Avg_Submissions_Attempted.toFixed(2)}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -129,16 +185,16 @@ const FighterRadarChart = ({ fighterData }) => {
     });
 
     const radarLine = d3.lineRadial()
-    .radius(d => radiusScale(d.value))
-    .angle((d, i) => i * angleSlice) 
-    .curve(d3.curveLinearClosed);
+      .radius(d => radiusScale(d.value))
+      .angle((d, i) => i * angleSlice) 
+      .curve(d3.curveLinearClosed);
   
-  g.append('path')
-    .datum(stats)
-    .attr('d', radarLine)
-    .attr('fill', 'rgba(0, 0, 255, 0.3)')
-    .attr('stroke', '#00f')
-    .attr('stroke-width', 2);
+    g.append('path')
+      .datum(stats)
+      .attr('d', radarLine)
+      .attr('fill', 'rgba(0, 0, 255, 0.3)')
+      .attr('stroke', '#00f')
+      .attr('stroke-width', 2);
   
     g.selectAll('.data-point')
       .data(stats)

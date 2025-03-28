@@ -4,136 +4,151 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home Page</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background-image: linear-gradient(to bottom, gray, rgb(72, 71, 71));
-      color: white;
-      padding: 20px;
-    }
-
-    nav {
-      background-color: #222;
-      padding: 15px;
-      display: flex;
-      justify-content: center;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      padding: 10px 15px;
-      transition: 0.3s;
-      border-radius: 5px;
-    }
-
-    nav a:hover {
-      background-color: #555;
-    }
-
-    .content {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      max-width: 1000px;
-      margin: 30px auto;
-    }
-
-    .content img {
-      max-width: 40%;
-      height: auto;
-      border-radius: 10px;
-    }
-
-    .text {
-      flex: 1; 
-      line-height: 1.6;
-      text-align: justify;
-    }
-
-    @media (max-width: 768px) {
-      .content {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .content img {
-        max-width: 80%;
-      }
-    }
-  </style>
 </head>
 <body>
 
   <nav>
     <ul>
-      <li><a href="heatmap.html">Heat Map</a></li>
-      <li><a href="radarchart.html">Radar Chart</a></li>
-      <li><a href="UFCPerformanceGraph.html">Bar Graph</a></li>
+      <li>UFC Data Visualizationn Project</li>
     </ul>
   </nav>
 
   <div class="content">
     <div class="text">
-      <h3>What Is The UFC?</h3>
-      <p>
-        The UFC is a Mixed Martial Arts Organization that was founded on November 12, 1993, in Denver, Colorado. Its original purpose was for 
-        martial artists of various disciplines like Karate, Boxing, Kickboxing, Muay Thai, Judo, and others to gather together and see which of their 
-        martial arts were the most effective with minimal rules and no weight classes.
+      <h1>What makes a UFC champion successful?      </h1>
+      <h3>What the Radar Chart shows?</h3>
+      <h4>Strikes</h4>
+        <p>Measures the average number of strikes a fighter throws per fight
+          Represents the fighter's offensive striking capabilities
+          Higher values indicate more active striking and potentially more aggressive fighting style
+        </p>      
+      <h4>Takedown</h4>  
+
+        Shows the average number of takedown attempts per fight
+        Indicates the fighter's wrestling and ground game strategy
+        Higher values suggest a strong focus on wrestling and taking the fight to the ground
+      <p>Shows the average number of takedown attempts per fight
+        Indicates the fighter's wrestling and ground game strategy
+        Higher values suggest a strong focus on wrestling and taking the fight to the ground
+      </p>  
+      <h4>Submissions</h4>  
+      <p>the average number of submission attempts per fight
+        Reflects the fighter's grappling skills and submission prowess
+        Higher values indicate a fighter who actively seeks to win fights through technical submissions
       </p>
     </div>
-    <img src="rorion-gracie-1.jpg" alt="Rorion and Art Davie">
   </div>
-  <div class = "content">
-    <div class ="text">
-      <H3>What Is The UFC Like Now?</H3>
-      <p>
-        In 2001, Dana White became the CEO of the UFC after his childhood friends took it over. He effectively is mostly responsible for the changes that have been made
-        to the UFC. In this time, the UFC doesno single night tournaments, or lack of weight classes. it was during Dana White's era that fighters had starte to
-        truly mix up the martial arts.
-      </p>  
-    </div>
-    <img src="dana.jpeg" alt="Dana white">
-  </div>
+  
+
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+
   <div class="content">
-    <div class ="text">
-      <H3>What Is  Mixed Martial Arts?</H3>
-      <p>
-        Although at the conception of Mixed Martial Arts, it was only a ruleset, now it is a fullblown art and combat sport of its own. It combines various techniques from
-        other martial arts disciplines like: striking from Boxing, Muay Thai, Karate, Kickboxing,etc , grappling from Sambo, Brazilian Jiu-Jitsu, Judo, etc. The fighters fight 
-        in an octogon in contrast to boxing in a ring where they use striking, takedowns, submissions to either win by decision or by knockout.
-      </p>  
+    <div class="text">
+      <h3>What the Heatmap shows?</h3>
+
+      <h4>Strikes</h4>
+      <ul>
+        <li><strong>Measures</strong>: The average number of strikes a fighter throws per fight.</li>
+        <li><strong>Represents</strong>: The fighter's offensive striking capabilities.</li>
+        <li><strong>Higher values indicate</strong>: More active striking and potentially a more aggressive fighting style. Fighters with high strike numbers may rely on pace and volume to outscore their opponents.</li>
+        <li><strong>Insights</strong>: 
+          <ul>
+            <li>Fighters with a high number of strikes might excel in maintaining pressure and controlling the pace of a fight.</li>
+            <li>A high strike count could also indicate that the fighter has strong cardio and is capable of maintaining an offensive game throughout the fight.</li>
+          </ul>
+        </li>
+      </ul>
+      
+      <h4>Takedown</h4>
+      <ul>
+        <li><strong>Measures</strong>: The average number of takedown attempts per fight.</li>
+        <li><strong>Represents</strong>: The fighter's wrestling and ground game strategy.</li>
+        <li><strong>Higher values indicate</strong>: A strong focus on wrestling and taking the fight to the ground.</li>
+        <li><strong>Insights</strong>: 
+          <ul>
+            <li>Fighters with high takedown attempts often prefer to control the fight on the ground and may have a wrestling-heavy style.</li>
+            <li>A high takedown attempt value could suggest a fighter’s confidence in their grappling, possibly looking for a ground-and-pound or submission finish.</li>
+          </ul>
+        </li>
+      </ul>
+      
+      <h4>Submissions</h4>
+      <ul>
+        <li><strong>Measures</strong>: The average number of submission attempts per fight.</li>
+        <li><strong>Represents</strong>: The fighter's grappling skills and submission prowess.</li>
+        <li><strong>Higher values indicate</strong>: A fighter who actively seeks to win fights through technical submissions.</li>
+        <li><strong>Insights</strong>: 
+          <ul>
+            <li>Fighters with higher submission attempts are likely well-versed in Brazilian Jiu-Jitsu or other submission-based styles.</li>
+            <li>Frequent submission attempts suggest a fighter’s ability to create opportunities on the ground, either to force a tap-out or create openings for other techniques.</li>
+          </ul>
+        </li>
+      </ul>
+      
+      <h4>Total Wins</h4>
+      <ul>
+        <li><strong>Measures</strong>: The total number of wins a fighter has accumulated over their career.</li>
+        <li><strong>Represents</strong>: Overall success in the octagon.</li>
+        <li><strong>Higher values indicate</strong>: Consistent performance and the ability to secure victories across many fights.</li>
+        <li><strong>Insights</strong>: 
+          <ul>
+            <li>Fighters with a high number of wins typically have a well-rounded skill set that allows them to adapt to various fight situations.</li>
+            <li>A high win total may also indicate experience and mental toughness, especially in high-pressure or championship-level fights.</li>
+          </ul>
+        </li>
+      </ul>
+      
+      <h4>Overall Insights from the Heatmap</h4>
+      <ul>
+        <li><strong>Fighter Comparison</strong>: The heatmap makes it easy to compare how different fighters approach a fight. For example, a fighter with high strikes but low takedowns might focus on striking, while one with high takedowns and submissions may have a grappling-heavy strategy.</li>
+        <li><strong>Performance Patterns</strong>: By analyzing trends in a fighter’s statistics, you can gain insights into their evolving fighting style over the years. For example, a fighter’s increase in submissions over time might indicate a shift towards a more grappling-focused approach.</li>
+        <li><strong>Strengths and Weaknesses</strong>: The heatmap helps identify a fighter's strengths and weaknesses, enabling analysts or fans to make predictions about how they might perform against certain opponents, based on their style and averages.</li>
+        <li><strong>Fighter Evolution</strong>: Tracking changes in metrics (e.g., a fighter's increased takedown attempts or strikes thrown) can provide insights into their development, adaptation, and refinement of techniques.</li>
+      </ul>
+      
     </div>
-    <img src="281402.JPG" alt="Ilia Topuria and Alexander vokanovski">
   </div>
-  </div>
+  <div id="root2"></div>
+  <script type="module" src="/src/main2.jsx"></script>
   <div class="content">
-    <div class ="text">
-      <H3>Who Are The Champions?</H3>
-      <p>
-        Mixed martial artists in the UFC are able to become champion through various ways and over the years, what made these champions successful has changed. 
-        Whether it be by submissions which involve putting the opponent in a hold or a lock, or by technical knockouts where the opponent is unable to continue fighting,
-        or by knockout where the opponent is rendered unconscious, or by split/unanimous decision where the judges at the end decide who was the better man/woman at the end of the match.
-        The champions are fighters who have proven to be at the top of their weight class by either specializing in an art or mixing them well enough to conquer their division.
-      </p>  
+    <div class="text">
+      <h4>What This Code Is Trying to Find Out:</h4>
+      <ul>
+        <li>Average Fighter Performance: The code calculates the average number of strikes, takedowns, and submission attempts per fight for each year. It also calculates win percentages for different methods (KO/TKO, submission, and decision wins) for each fighter.</li>
+        <li>Trends Over Time: The data is grouped into 5-year periods (e.g., 2000-2004, 2005-2009) to visualize performance trends. This helps identify whether fighters' strategies have changed or if performance metrics have improved or declined over time.</li>
+        <li>Yearly Breakdown: The data is broken down by individual years, allowing the chart to visualize performance year-over-year within each 5-year span.</li>
+      </ul>
+      
+      <h4>What the Performance Graph Displays:</h4>
+      <ul>
+        <li>Avg Strikes per Fight: The average number of strikes thrown by each fighter per fight, shown over the course of years in a given 5-year period. It helps measure the aggression and striking-focused strategy of fighters over time.</li>
+        <li>Avg Takedowns per Fight: The average number of takedown attempts per fight, indicating a fighter's wrestling strategy and focus on controlling the fight on the ground.</li>
+        <li>Avg Submission Attempts per Fight: The average number of submission attempts per fight, which shows a fighter's grappling strategy and their focus on ending fights through submissions.</li>
+        <li>KO/TKO Win Percentage: The percentage of wins achieved by knockout (KO) or technical knockout (TKO), showing how often a fighter wins through striking finishes.</li>
+        <li>Submission Win Percentage: The percentage of wins achieved by submission, reflecting how often fighters win through grappling and submissions over time.</li>
+        <li>Decision Win Percentage: The percentage of wins achieved by decision, indicating the frequency of fights going to the judges' scorecards and resulting in a decision.</li>
+      </ul>
+      
+      <h4>Graph Visuals:</h4>
+      <ul>
+        <li>X-axis: Represents the years within each 5-year period.</li>
+        <li>Y-axis: Represents the average values per fight (e.g., number of strikes, takedowns, submissions) or percentages (e.g., KO/TKO %).</li>
+        <li>Lines: Different lines are plotted for each metric, using distinct colors to represent each one (e.g., strikes might be in purple, takedowns in green, submissions in orange, etc.).</li>
+        <li>Legend: A color-coded legend is provided to match each line with its corresponding metric, helping users interpret the graph.</li>
+      </ul>
+      
+      <h4>Purpose and Insights:</h4>
+      <ul>
+        <li>This analysis enables UFC fans, analysts, or researchers to track how performance trends have shifted over time and which types of fighting strategies (e.g., striking vs. grappling) have become more or less common.</li>
+        <li>It’s particularly useful for observing how the sport has evolved, including the dominance of particular types of victories or tactics across different periods.</li>
+      </ul>
+      
     </div>
-    <img src="maxuulrls10c1.jpg" alt="Champions of the UFC">
   </div>
-  </div>
+
+  <div id="root4"></div>
+  <script type="module" src="/src/main4.jsx"></script>
 
 </body>
 </html>

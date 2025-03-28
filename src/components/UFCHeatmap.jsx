@@ -61,14 +61,21 @@ const UFCHeatmap = ({ csvFile }) => {
     fetchCSV();
   }, [csvFile]);
 
-  const filteredData = fightersData.filter(fighter => 
-    !selectedFighter || fighter.Fighter === selectedFighter
-  );
+  const filteredData = selectedFighter 
+    ? fightersData.filter(fighter => fighter.Fighter === selectedFighter)
+    : fightersData;
 
   useEffect(() => {
     if (filteredData.length === 0) return;
 
-    const svg = d3.select("#heatmap").attr("width", 1200).attr("height", 700);
+    const fighterCount = filteredData.length;
+    const cellWidth = 150; 
+    const totalWidth = Math.max(1200, fighterCount * cellWidth);
+    const totalHeight = 700;
+
+    const svg = d3.select("#heatmap")
+      .attr("width", totalWidth)
+      .attr("height", totalHeight);
     svg.selectAll("*").remove();
 
     const metrics = ['Avg_Strikes_Thrown', 'Avg_Takedowns_Attempted', 'Avg_Submissions_Attempted', 'Total_Wins'];
@@ -79,43 +86,94 @@ const UFCHeatmap = ({ csvFile }) => {
       value: fighter[metric] || 0
     })));
 
-    const xScale = d3.scaleBand().domain(filteredData.map(d => d.Fighter)).range([0, 1200]).padding(0.1);
-    const yScale = d3.scaleBand().domain(metrics).range([0, 600]).padding(0.1);
-    const colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, d3.max(heatmapData, d => d.value)]);
+    const xScale = d3.scaleBand()
+      .domain(filteredData.map(d => d.Fighter))
+      .range([0, totalWidth])
+      .padding(0.1);
 
-    svg.selectAll("rect").data(heatmapData).enter().append("rect")
+    const yScale = d3.scaleBand()
+      .domain(metrics)
+      .range([0, 600])
+      .padding(0.1);
+
+    const colorScale = d3.scaleSequential(d3.interpolateBlues)
+      .domain([0, d3.max(heatmapData, d => d.value)]);
+
+    svg.selectAll("rect")
+      .data(heatmapData)
+      .enter()
+      .append("rect")
       .attr("x", d => xScale(d.fighter))
       .attr("y", d => yScale(d.metric))
       .attr("width", xScale.bandwidth())
       .attr("height", yScale.bandwidth())
       .attr("fill", d => colorScale(d.value));
 
-    svg.selectAll("text").data(heatmapData).enter().append("text")
+    svg.selectAll("text")
+      .data(heatmapData)
+      .enter()
+      .append("text")
       .attr("x", d => xScale(d.fighter) + xScale.bandwidth() / 2)
       .attr("y", d => yScale(d.metric) + yScale.bandwidth() / 2)
       .attr("text-anchor", "middle")
       .attr("dy", "-.5em")
       .attr("fill", "black")
-      .attr("font-size", "12px")
-      .text(d => `${d.value.toFixed(1)} (${d.metric.replace('Avg_', '').replace('_', ' ')})`);
+      .attr("font-size", "10px")
+      .text(d => {
+
+        const metricName = d.metric.replace('Avg_', '').replace('_', ' ');
+        const formattedValue = metricName === 'Takedowns Attempted' 
+          ? d.value.toFixed(2) 
+          : d.value.toFixed(1);
+        return `${formattedValue} (${metricName})`;
+      });
+
+    svg.append("g")
+      .attr("transform", `translate(0, 600)`)
+      .call(d3.axisBottom(xScale))
+      .selectAll("text")
+      .attr("transform", "rotate(-45)")
+      .style("text-anchor", "end");
+
+    svg.append("g")
+      .call(d3.axisLeft(yScale))
+      .selectAll("text")
+      .text(d => d.replace('Avg_', '').replace('_', ' '));
+
   }, [filteredData]);
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">UFC Fighter Performance Heatmap</h2>
-      <div className="mb-4">
-        <label className="mr-2">Select Fighter:</label>
-        <select value={selectedFighter} onChange={(e) => setSelectedFighter(e.target.value)}>
-          <option value="">All Fighters</option>
-          {fightersList.map(fighter => (
-            <option key={fighter} value={fighter}>
-              {fighter} ({fighterYears[fighter]?.earliest} - {fighterYears[fighter]?.latest})
-            </option>
-          ))}
-        </select>
+    <div className="fixed inset-0 z-50 flex flex-col bg-white">
+      <div className="p-4 border-b">
+        <h2 className="text-xl font-bold mb-4">UFC Fighter Performance Heatmap</h2>
+        <div className="flex items-center">
+          <label className="mr-2 font-semibold">Select Fighter:</label>
+          <select 
+            value={selectedFighter} 
+            onChange={(e) => setSelectedFighter(e.target.value)}
+            className="px-2 py-1 border rounded w-64"
+          >
+            <option value="" className="font-bold">All Fighters (Complete Dataset)</option>
+            {fightersList.map(fighter => (
+              <option key={fighter} value={fighter}>
+                {fighter} ({fighterYears[fighter]?.earliest} - {fighterYears[fighter]?.latest})
+              </option>
+            ))}
+          </select>
+        </div>
+        
+        {selectedFighter && (
+          <p className="font-bold mb-2">
+            {selectedFighter} (Active Years: {fighterYears[selectedFighter]?.earliest} - {fighterYears[selectedFighter]?.latest})
+          </p>
+        )}
       </div>
-      <p className="font-bold">{selectedFighter && `${selectedFighter} (${fighterYears[selectedFighter]?.earliest} - ${fighterYears[selectedFighter]?.latest})`}</p>
-      <svg id="heatmap"></svg>
+      
+      <div className="flex-grow overflow-hidden">
+        <div className="h-full overflow-auto">
+          <svg id="heatmap" className="w-full"></svg>
+        </div>
+      </div>
     </div>
   );
 };
